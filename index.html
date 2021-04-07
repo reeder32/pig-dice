@@ -10,9 +10,11 @@
   <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
     crossorigin="anonymous">
     </script>
+  <script src="js/scripts.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
     integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous">
     </script>
+  <link rel="stylesheet" href="css/styles.css" type="text/css">
   <title>Pig Dice</title>
 </head>
 
@@ -20,16 +22,21 @@
   <div class="container">
     <form class="playerForm">
       <div class="form-group">
-        <label for="name">Player's Name:</label>
-        <input id="name" class="form-control" type="text">
+        <label for="name1">Player's Name:</label>
+        <input id="name1" class="form-control" type="text">
       </div>
-      <div class="form-group">
-        <label for="name">Player's Name:</label>
-        <input id="name" class="form-control" type="text">
-      </div>
-      <button type="submit" class="btn">Add Player!</button>
+
+      <button type="submit" class="btn btn-primary">Add Player!</button>
     </form>
-    <button id="go" class="btn">Let's Play!</button>
+    <button id="go" class="btn btn-success">Let's Play!</button>
+    <div class="turn">
+      <button id="roll" class="btn btn-primary">Roll Dice</button>
+      <button id="Pass" class="btn btn-secondary">Pass to next player</button>
+    </div>
+    <div class="scoreboard">
+      <ul class="players"></ul>
+    </div>
+
   </div>
 </body>
 

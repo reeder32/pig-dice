@@ -42,14 +42,8 @@ Player.prototype.addScore = function () {
   this.currentRoll = 0;
 }
 
-Player.prototype.rollDice = function () {
-  const rollValue = roll();
-  if (rollValue === 1) {
-    this.currentRoll = 0
-
-  } else {
-    this.currentRoll += rollValue;
-  }
+Player.prototype.addRollValue = function (rollValue) {
+  this.currentRoll += rollValue;
 }
 
 
@@ -57,3 +51,28 @@ Player.prototype.rollDice = function () {
 //let player = new Player("Nick", 0, 0);
 
 // Ui logic
+$(document).ready(function () {
+  let game = new Game();
+  $(".playerForm").submit(function (event) {
+    event.preventDefault();
+    let name1 = $("input#name1").val();
+    if (name1 != "") {
+      let player = new Player(name1)
+      game.addPlayer(player);
+      $("input#name1").val("");
+    } else {
+      alert("plz enter a name")
+    }
+    showScoreboard();
+  });
+
+  function showScoreboard() {
+    $(".players").append("<li>" + game.players[game.players.length - 1].name + game.players[game.players.length - 1].currentRoll + game.players[game.players.length - 1].score + "</li>");
+  }
+
+  $("#go").click(function () {
+    $(".playerForm").hide();
+    game.currentPlayer = game.players[0];
+    console.log(game.currentPlayer)
+  })
+});
