@@ -31,4 +31,4 @@ let sammai = new Player("Sammai")
       game.addPlayer(nick);
       game.addPlayer(sammai);
       game.pass(nick);
-Expected Output: Game {players: [Player{name: "Nick", currentRoll: 0, score: 0},Player{name: "Sammai", currentRoll: 0, score: 0} ], currentPlayer: Player{name: "Sammai", currentRoll: 0, score: 0}}
+Expected Output: Player { name: "Sammai", currentRoll: 0, score: 0 }

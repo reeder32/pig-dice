@@ -55,13 +55,5 @@ Player.prototype.rollDice = function () {
 
 
 //let player = new Player("Nick", 0, 0);
-let game = new Game();
-let nick = new Player("Nick");
-game.addPlayer(nick);
-let sammai = new Player("Sammai");
-game.addPlayer(sammai);
-let michael = new Player("Michael");
-game.addPlayer(michael);
-game.pass(michael);
-console.log(game.currentPlayer);
+
 // Ui logic
