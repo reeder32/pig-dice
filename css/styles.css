@@ -9,6 +9,20 @@
 .form-inline label {
   margin: 8px;
 }
+
 #add-player {
   margin: 16px;
+}
+
+.table {
+  margin-top: 20px;
+  display: none;
+}
+
+span {
+  color: blueviolet;
+}
+
+div {
+  margin-bottom: 8px;
 }

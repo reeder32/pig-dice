@@ -17,27 +17,50 @@
 </head>
 
 <body>
-  <div class="container">
-    <form class="player-form">
-      <div class="form-inline">
-        <div class="form-group">
-          <label for="name1">Player's Name:</label>
-          <input id="name1" class="form-control" type="text">
-          <button id="add-player" class="btn btn-success">Add Player!</button>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-2">Pig dice!</h1>
+      <p class="lead">Let's have some fun!</p>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-8 offset-sm-2">
+        <div class="col-sm-12">
+          <form class="player-form">
+            <h3 id="intro">Let's start by adding at least 2 names.</h3>
+            <div class="form-inline">
+              <div class="form-group">
+                <label for="name1">Player's Name:</label>
+                <input id="name1" class="form-control" type="text">
+                <button id="add-player" class="btn btn-success">Add Player!</button>
+              </div>
+            </div>
+            <button id="play-button" type="submit" class="btn btn-primary btn-block">Let's Play!</button>
+          </form>
+
+          <div class="turn bg-light">
+            <h1>Current player: <span id="player-name"></span></h1>
+            <h2>Current Roll Value: <span id="current-roll"></span></h2>
+            <h3>Score: <span id="player-score"></span></h3>
+            <p>Dice Roll: <span id="dice-roll"></span></p>
+            <button id="roll" class="btn btn-primary btn-lg btn-block">Roll Dice</button>
+            <button id="pass" class="btn btn-danger btn-lg btn-block">Pass to next player</button>
+          </div>
+          <div class="scoreboard">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Score</th>
+                </tr>
+              <tbody>
+
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
-      <button id="play-button" type="submit" class="btn btn-primary">Let's Play!</button>
-    </form>
-
-    <div class="turn">
-      <h1 id="player-name">H1</h1>
-      <h2 id="current-roll">h2</h2>
-      <h3 id="player-score">h3</h3>
-      <button id="roll" class="btn btn-primary">Roll Dice</button>
-      <button id="pass" class="btn btn-secondary">Pass to next player</button>
-    </div>
-    <div class="scoreboard">
-      <ul id="players"></ul>
     </div>
 
   </div>

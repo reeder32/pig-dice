@@ -2,6 +2,7 @@
 function roll() {
   return Math.floor(Math.random() * 6) + 1;
 }
+
 // Business logic
 
 // Game logic
@@ -45,31 +46,37 @@ Player.prototype.addRollValue = function (rollValue) {
   this.currentRoll += rollValue;
 }
 
-
-
-//let player = new Player("Nick", 0, 0);
-
 // Ui logic
 $(document).ready(function () {
   let game = new Game();
+  function refresh() {
+    location.reload();
+  }
   function showScoreboard() {
-    $("#players").empty();
+    $("table").slideDown();
+    $("table tbody").empty();
     game.players.forEach(player => {
-      $("#players").append("<li>" + player.name + player.currentRoll + player.score + "</li>");
+      $("table tbody").append("<tr><td>" + player.name + "</td>" + "<td>" + player.score + "</td>" + "</tr>");
     });
   }
   function showPlayerCard(player) {
     $("#player-name").text(player.name);
     $("#current-roll").text(player.currentRoll);
     $("#player-score").text(player.score);
+    highlightCurrentPlayer(player);
   }
   $(".player-form").submit(function (event) {
     event.preventDefault();
-    $(".player-form").hide();
+    $(".player-form").slideUp();
     $(".turn").fadeIn();
     game.currentPlayer = game.players[0];
     showPlayerCard(game.currentPlayer);
   });
+
+  function highlightCurrentPlayer(player) {
+    $("tr td").text();
+
+  }
 
   $("#add-player").click(function (event) {
     event.preventDefault();
@@ -79,22 +86,32 @@ $(document).ready(function () {
       game.addPlayer(player);
       $("input#name1").val("");
     } else {
-      alert("plz enter a name")
+      window.alert("plz enter a name");
+      return;
     }
     if (game.players.length >= 2) {
+      $("#intro").text("Click 'Let's Play!' to get started.")
       $("#play-button").fadeIn();
+    } else {
+      $("#intro").text("At least one more name.")
     }
     showScoreboard();
   });
 
   $("#roll").click(function () {
-    let rollVal = roll();
-    if (rollVal === 1) {
+    let firstDice = roll();
+    let secondDice = roll();
+
+    if (firstDice === 1 || secondDice === 1) {
+      window.alert("You rolled a 1!");
       game.currentPlayer.currentRoll = 0;
       game.pass(game.currentPlayer);
+      $("#dice-roll").text("");
     } else {
-      game.currentPlayer.addRollValue(rollVal);
+      $("#dice-roll").text("first dice: " + firstDice + " second dice: " + secondDice);
+      game.currentPlayer.addRollValue(firstDice + secondDice);
     }
+
     showPlayerCard(game.currentPlayer);
     showScoreboard();
   });
@@ -102,7 +119,9 @@ $(document).ready(function () {
   $("#pass").click(function () {
     game.currentPlayer.addScore();
     if (game.currentPlayer.score >= 100) {
-      console.log("Yay! You won!!");
+      if (confirm(`Yay! ${game.currentPlayer.name} won this time!!`)) {
+        refresh();
+      }
     } else {
       game.pass(game.currentPlayer);
     }
