@@ -53,6 +53,9 @@ Player.prototype.addRollValue = function (rollValue) {
 // Ui logic
 $(document).ready(function () {
   let game = new Game();
+  function showScoreboard() {
+    $(".players").append("<li>" + game.players[game.players.length - 1].name + game.players[game.players.length - 1].currentRoll + game.players[game.players.length - 1].score + "</li>");
+  }
   $(".playerForm").submit(function (event) {
     event.preventDefault();
     let name1 = $("input#name1").val();
@@ -66,13 +69,18 @@ $(document).ready(function () {
     showScoreboard();
   });
 
-  function showScoreboard() {
-    $(".players").append("<li>" + game.players[game.players.length - 1].name + game.players[game.players.length - 1].currentRoll + game.players[game.players.length - 1].score + "</li>");
-  }
-
   $("#go").click(function () {
     $(".playerForm").hide();
     game.currentPlayer = game.players[0];
     console.log(game.currentPlayer)
+  })
+
+  $("#roll").click(function () {
+    let rollVal = roll();
+    if (rollVal === 1) {
+      //do something
+    } else {
+
+    }
   })
 });
