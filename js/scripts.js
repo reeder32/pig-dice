@@ -18,13 +18,12 @@ Game.prototype.addPlayer = function (player) {
 Game.prototype.pass = function (player) {
   for (let i = 0; i < this.players.length; i++) {
     const p = this.players[i];
-    //console.log(p.name);
     if (p.name === player.name) {
       this.players[i] = player;
       if (i < this.players.length - 1) {
-        game.currentPlayer = this.players[i + 1]
+        this.currentPlayer = this.players[i + 1]
       } else {
-        game.currentPlayer = this.players[0]
+        this.currentPlayer = this.players[0]
       }
     }
   }
@@ -54,9 +53,25 @@ Player.prototype.addRollValue = function (rollValue) {
 $(document).ready(function () {
   let game = new Game();
   function showScoreboard() {
-    $(".players").append("<li>" + game.players[game.players.length - 1].name + game.players[game.players.length - 1].currentRoll + game.players[game.players.length - 1].score + "</li>");
+    $("#players").empty();
+    game.players.forEach(player => {
+      $("#players").append("<li>" + player.name + player.currentRoll + player.score + "</li>");
+    });
   }
-  $(".playerForm").submit(function (event) {
+  function showPlayerCard(player) {
+    $("#player-name").text(player.name);
+    $("#current-roll").text(player.currentRoll);
+    $("#player-score").text(player.score);
+  }
+  $(".player-form").submit(function (event) {
+    event.preventDefault();
+    $(".player-form").hide();
+    $(".turn").fadeIn();
+    game.currentPlayer = game.players[0];
+    showPlayerCard(game.currentPlayer);
+  });
+
+  $("#add-player").click(function (event) {
     event.preventDefault();
     let name1 = $("input#name1").val();
     if (name1 != "") {
@@ -66,21 +81,32 @@ $(document).ready(function () {
     } else {
       alert("plz enter a name")
     }
+    if (game.players.length >= 2) {
+      $("#play-button").fadeIn();
+    }
     showScoreboard();
   });
-
-  $("#go").click(function () {
-    $(".playerForm").hide();
-    game.currentPlayer = game.players[0];
-    console.log(game.currentPlayer)
-  })
 
   $("#roll").click(function () {
     let rollVal = roll();
     if (rollVal === 1) {
-      //do something
+      game.currentPlayer.currentRoll = 0;
+      game.pass(game.currentPlayer);
     } else {
-
+      game.currentPlayer.addRollValue(rollVal);
     }
-  })
+    showPlayerCard(game.currentPlayer);
+    showScoreboard();
+  });
+
+  $("#pass").click(function () {
+    game.currentPlayer.addScore();
+    if (game.currentPlayer.score >= 100) {
+      console.log("Yay! You won!!");
+    } else {
+      game.pass(game.currentPlayer);
+    }
+    showPlayerCard(game.currentPlayer);
+    showScoreboard();
+  });
 });

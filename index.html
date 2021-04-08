@@ -18,21 +18,26 @@
 
 <body>
   <div class="container">
-    <form class="playerForm">
-      <div class="form-group">
-        <label for="name1">Player's Name:</label>
-        <input id="name1" class="form-control" type="text">
+    <form class="player-form">
+      <div class="form-inline">
+        <div class="form-group">
+          <label for="name1">Player's Name:</label>
+          <input id="name1" class="form-control" type="text">
+          <button id="add-player" class="btn btn-success">Add Player!</button>
+        </div>
       </div>
-
-      <button type="submit" class="btn btn-primary">Add Player!</button>
+      <button id="play-button" type="submit" class="btn btn-primary">Let's Play!</button>
     </form>
-    <button id="go" class="btn btn-success">Let's Play!</button>
+
     <div class="turn">
+      <h1 id="player-name">H1</h1>
+      <h2 id="current-roll">h2</h2>
+      <h3 id="player-score">h3</h3>
       <button id="roll" class="btn btn-primary">Roll Dice</button>
-      <button id="Pass" class="btn btn-secondary">Pass to next player</button>
+      <button id="pass" class="btn btn-secondary">Pass to next player</button>
     </div>
     <div class="scoreboard">
-      <ul class="players"></ul>
+      <ul id="players"></ul>
     </div>
 
   </div>

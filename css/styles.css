@@ -1,0 +1,14 @@
+#play-button {
+  display: none;
+}
+
+.turn {
+  display: none;
+}
+
+.form-inline label {
+  margin: 8px;
+}
+#add-player {
+  margin: 16px;
+}
