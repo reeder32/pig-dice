@@ -4,13 +4,11 @@ function roll() {
 }
 
 // Business logic
-
 // Game logic
 function Game() {
   this.players = [];
   this.currentPlayer = undefined;
 }
-
 
 Game.prototype.addPlayer = function (player) {
   this.players.push(player);
@@ -22,14 +20,14 @@ Game.prototype.pass = function (player) {
     if (p.name === player.name) {
       this.players[i] = player;
       if (i < this.players.length - 1) {
-        this.currentPlayer = this.players[i + 1]
+        this.currentPlayer = this.players[i + 1];
       } else {
         this.currentPlayer = this.players[0]
       }
     }
   }
-}
 
+}
 // Player logic
 function Player(name) {
   this.name = name
@@ -63,8 +61,8 @@ $(document).ready(function () {
     $("#player-name").text(player.name);
     $("#current-roll").text(player.currentRoll);
     $("#player-score").text(player.score);
-    highlightCurrentPlayer(player);
   }
+
   $(".player-form").submit(function (event) {
     event.preventDefault();
     $(".player-form").slideUp();
@@ -72,11 +70,6 @@ $(document).ready(function () {
     game.currentPlayer = game.players[0];
     showPlayerCard(game.currentPlayer);
   });
-
-  function highlightCurrentPlayer(player) {
-    $("tr td").text();
-
-  }
 
   $("#add-player").click(function (event) {
     event.preventDefault();
@@ -101,17 +94,15 @@ $(document).ready(function () {
   $("#roll").click(function () {
     let firstDice = roll();
     let secondDice = roll();
-
+    $("#dice-roll").text("first dice: " + firstDice + " second dice: " + secondDice);
     if (firstDice === 1 || secondDice === 1) {
-      window.alert("You rolled a 1!");
       game.currentPlayer.currentRoll = 0;
       game.pass(game.currentPlayer);
+      alert("You rolled a 1 :-(");
       $("#dice-roll").text("");
     } else {
-      $("#dice-roll").text("first dice: " + firstDice + " second dice: " + secondDice);
       game.currentPlayer.addRollValue(firstDice + secondDice);
     }
-
     showPlayerCard(game.currentPlayer);
     showScoreboard();
   });
@@ -123,7 +114,7 @@ $(document).ready(function () {
         refresh();
       }
     } else {
-      game.pass(game.currentPlayer);
+      game.pass(game.currentPlayer, 0);
     }
     showPlayerCard(game.currentPlayer);
     showScoreboard();
